@@ -34,7 +34,7 @@ Once the schema was built, I ran complex queries to extract business value.
 
 #### Insight 1: Monthly Complaint Volume per Product
 *This query identifies which products are gaining more complaints over time.*
-
+```sql
 SELECT 
     d.year,
     d.month_name,
@@ -45,9 +45,11 @@ JOIN dim_date d ON f.date_received_id = d.date_id
 JOIN dim_products p ON f.product_id = p.product_id
 GROUP BY d.year, d.month, d.month_name, p.product
 ORDER BY d.year DESC, d.month DESC, total_complaints DESC;
+```
 
 #### Insight 2: Companies with Poor Response Time
 *Identifying companies that fail to provide a 'Timely Response' to consumers.*
+```sql
 SELECT 
     comp.company,
     loc.state,
@@ -61,7 +63,7 @@ WHERE cb.timely_response = 'no'
 GROUP BY comp.company, loc.state, cb.timely_response
 ORDER BY complaint_count DESC
 LIMIT 10;
-
+```
 
 ---
 
